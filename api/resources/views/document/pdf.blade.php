@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Счет</title>
@@ -9,7 +9,8 @@
         .main {
             width: 978px;
             margin: 0 auto;
-            font-size: 17px;
+            font-size: 17px !important;
+            font-family: "DejaVu Sans";
         }
     </style>
 </head>
@@ -65,7 +66,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" style="height: 13mm; width: 105mm;">
                     <tr>
                         <td valign="top">
-                            <div>ООО "{{ 'наименование поставщика' }}"</div>
+                            <div>ООО "{{ $provider }}"</div>
                         </td>
                     </tr>
                 </table>
@@ -94,7 +95,7 @@
             </td>
             <td>
                 <div style="font-weight:bold;  padding-left:2px;">
-                    ООО "{{ 'наименование поставщика' }}" ИНН {{ 'ИНН поставщика' }}, КПП {{ 'КПП поставщика' }}<br>
+                    ООО "{{ $provider }}" ИНН {{ $provider_inn }}, КПП {{ $provider_kpp }}<br>
                     <span style="font-weight: normal;">
                         {{ 'адрес поставщика' }}
                     </span>
@@ -107,7 +108,7 @@
             </td>
             <td>
                 <div style="font-weight:bold;  padding-left:2px;">
-                    ИП {{ 'ФИО покупателя' }}, ИНН {{ 'ИНН покупателя' }}<br><span style="font-weight: normal;">{{ 'адрес покупателя' }}</span>
+                    ИП {{ $customer_full_name }}, ИНН {{ $customer_inn }}<br><span style="font-weight: normal;">{{ 'адрес покупателя' }}</span>
                 </div>
             </td>
         </tr>
@@ -126,26 +127,28 @@
         </tr>
         </thead>
         <tbody >
-        <tr>
-            <td style="width:13mm;">
-                {{ 'порядковый номер' }}
-            </td>
-            <td>
-                {{ 'наименование товара' }}
-            </td>
-            <td style="width:20mm; white-space: nowrap;">
-                {{ 'количество' }}
-            </td>
-            <td style="width:17mm;  white-space: nowrap;">
-                {{ 'единица измерения' }}
-            </td>
-            <td style="width:27mm; text-align: center;  white-space: nowrap; ">
-                {{ 'цена' }}
-            </td>
-            <td style="width:27mm; text-align: center;  white-space: nowrap;">
-                {{ 'сумма' }}
-            </td>
-        </tr>
+        @foreach($products as $key => $product)
+            <tr>
+                <td style="width:13mm;">
+                    {{ $key + 1 }}
+                </td>
+                <td>
+                    {{ $product['name'] }}
+                </td>
+                <td style="width:20mm; white-space: nowrap;">
+                    {{ $product['count'] }}
+                </td>
+                <td style="width:17mm;  white-space: nowrap;">
+                    {{ 'шт' }}
+                </td>
+                <td style="width:27mm; text-align: center;  white-space: nowrap; ">
+                    {{ $product['price'] }}
+                </td>
+                <td style="width:27mm; text-align: center;  white-space: nowrap;">
+                    {{ $product['count'] * $product['price'] }}
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 

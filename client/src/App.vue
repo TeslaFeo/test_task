@@ -94,6 +94,8 @@
     name: 'App',
     data() {
       return {
+        errors: {},
+
         provider: '',
         provider_inn: '',
         provider_kpp: '',
@@ -106,7 +108,7 @@
     methods: {
       submit() {
         let formData = new FormData();
-console.log(this.company_logo)
+
         formData.append('provider', this.provider);
         formData.append('provider_inn', this.provider_inn);
         formData.append('provider_kpp', this.provider_kpp);
@@ -120,16 +122,23 @@ console.log(this.company_logo)
           formData.append('products[' + key + '][price]', product.price);
         });
 
-        fetch('http://test-task.loc/api/get-document', {
+        axios({
+          url: 'http://test-task.loc/api/get-document',
           method: 'POST',
-          body: formData,
-        }).then( res => res.blob() )
-        .then( blob => {
-          let file = window.URL.createObjectURL(blob);
+          data: formData,
+          responseType: 'blob',
+        }).then(response => {
+          let file = window.URL.createObjectURL(response.data);
           let a = document.createElement('a')
           a.href = file
           a.download = 'document.pdf'
           a.click()
+        }).catch(error => {
+          if (error.response.status === 422) {
+            this.errors = error.response.data
+          } else {
+            alert('Произошла непредвиденная ошибка!');
+          }
         });
       },
       changeFile() {
@@ -150,6 +159,9 @@ console.log(this.company_logo)
 
         return !isNaN(amount) ? amount : 0;
       },
+      getError(key) {
+        return this.errors[key][0] || null;
+      }
     }
   };
 </script>
