@@ -119,6 +119,12 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/symfony/service-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/phenx/php-svg-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/phenx/php-font-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/barryvdh/laravel-dompdf" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/masterminds/html5" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/dompdf/dompdf" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

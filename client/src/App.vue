@@ -123,6 +123,13 @@ console.log(this.company_logo)
         fetch('http://test-task.loc/api/get-document', {
           method: 'POST',
           body: formData,
+        }).then( res => res.blob() )
+        .then( blob => {
+          let file = window.URL.createObjectURL(blob);
+          let a = document.createElement('a')
+          a.href = file
+          a.download = 'document.pdf'
+          a.click()
         });
       },
       changeFile() {
