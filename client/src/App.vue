@@ -106,20 +106,22 @@
     methods: {
       submit() {
         let formData = new FormData();
-
+console.log(this.company_logo)
         formData.append('provider', this.provider);
         formData.append('provider_inn', this.provider_inn);
         formData.append('provider_kpp', this.provider_kpp);
-        //formData.append('company_logo', this.company_logo);
+        formData.append('company_logo', this.company_logo);
         formData.append('customer_full_name', this.customer_full_name);
         formData.append('customer_inn', this.customer_inn);
-        //formData.append('products', this.products);
 
-        fetch('http://localhost:8080/api/get-document', {
+        this.products.forEach((product, key) => {
+          formData.append('products[' + key + '][name]', product.name);
+          formData.append('products[' + key + '][count]', product.count);
+          formData.append('products[' + key + '][price]', product.price);
+        });
+
+        fetch('http://test-task.loc/api/get-document', {
           method: 'POST',
-          headers: {
-            //'Content-Type': 'multipart/form-data',
-          },
           body: formData,
         });
       },

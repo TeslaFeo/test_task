@@ -31,9 +31,10 @@ class DocumentRequest extends FormRequest
             'customer_full_name' => ['required', 'string', 'min:3', 'max:255'],
             'customer_inn' => ['required', 'string', 'min:3', 'max:255'],
             'products' => ['required', 'array', 'min:1',],
-            'products.name' => ['required', 'string', 'min:3', 'max:255'],
-            'products.count' => ['required', 'integer'],
-            'products.price' => ['required', 'numeric', 'min:3', 'max:255'],
+            'products.*' => ['required', 'array'],
+            'products.*.name' => ['required', 'string', 'min:3', 'max:255'],
+            'products.*.count' => ['required', 'integer'],
+            'products.*.price' => ['required', 'numeric', 'min:3', 'max:255'],
         ];
     }
 
