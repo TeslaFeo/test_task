@@ -180,6 +180,16 @@
       };
     },
     methods: {
+      resetForm() {
+        this.errors = {};
+        this.provider = '';
+        this.provider_inn = '';
+        this.provider_kpp = '';
+        this.company_logo = '';
+        this.customer_full_name = '';
+        this.customer_inn = '';
+        this.products = [];
+      },
       submit() {
         let formData = new FormData();
 
@@ -197,16 +207,17 @@
         });
 
         axios({
-          url: 'http://test-task.loc/api/get-document',
+          url: 'http://localhost:8080/api/get-document',
           method: 'POST',
           data: formData,
           responseType: 'blob',
         }).then(response => {
+          this.resetForm();
           let file = window.URL.createObjectURL(response.data);
-          let a = document.createElement('a')
-          a.href = file
-          a.download = 'document.pdf'
-          a.click()
+          let a = document.createElement('a');
+          a.href = file;
+          a.download = 'document.pdf';
+          a.click();
         }).catch(error => {
           if (error.response.status === 422) {
             error.response.data.text().then((text) => {
