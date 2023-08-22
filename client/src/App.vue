@@ -251,6 +251,7 @@
           count: '',
           price: '',
         })
+        this.removeError('products')
       },
       removeProduct(key) {
         this.products.splice(key, 1);
