@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 text-start">
         <form @submit.prevent="submit" @input="removeError($event.target.getAttribute('name'))">
           <div class="mb-3">
             <label for="input-provider" class="form-label">Наименование поставщика</label>
