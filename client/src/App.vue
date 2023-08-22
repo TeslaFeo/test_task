@@ -142,7 +142,11 @@
 
             <tfoot>
               <tr>
-                <td colspan="5"></td>
+                <td colspan="5">
+                  <div v-if="getError('products')" class="invalid-feedback text-end d-block">
+                    {{ getError('products') }}
+                  </div>
+                </td>
                 <td>
                   <button class="btn btn-primary btn-sm" @click.prevent="addProduct">
                     Добавить
@@ -153,8 +157,10 @@
           </table>
 
           <div class="text-center">
-            <button type="submit" class="btn btn-success">
-              Скачать документ
+            <button type="submit"
+                    class="btn btn-success"
+                    :disabled="loading">
+              {{ loading ? 'Загрузка...' : 'Скачать документ' }}
             </button>
           </div>
         </form>
@@ -177,6 +183,8 @@
         customer_full_name: '',
         customer_inn: '',
         products: [],
+
+        loading: false,
       };
     },
     methods: {
@@ -206,12 +214,16 @@
           formData.append('products[' + key + '][price]', product.price);
         });
 
+        this.loading = true;
+
         axios({
           url: 'http://localhost:8080/api/get-document',
           method: 'POST',
           data: formData,
           responseType: 'blob',
         }).then(response => {
+          this.loading = false;
+
           this.resetForm();
           let file = window.URL.createObjectURL(response.data);
           let a = document.createElement('a');
@@ -219,6 +231,8 @@
           a.download = 'document.pdf';
           a.click();
         }).catch(error => {
+          this.loading = false;
+
           if (error.response.status === 422) {
             error.response.data.text().then((text) => {
               this.errors = JSON.parse(text)

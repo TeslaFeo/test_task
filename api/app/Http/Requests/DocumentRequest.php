@@ -51,6 +51,7 @@ class DocumentRequest extends FormRequest
             'image' => 'Поле ":attribute" должно быть изображением.',
             'array' => 'Поле ":attribute" должно быть массивом.',
             'numeric' => 'Поле ":attribute" должно быть числом.',
+            'products.required' => 'Необходимо добавить товары',
         ];
     }
 
