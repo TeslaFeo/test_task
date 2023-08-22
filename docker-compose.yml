@@ -11,18 +11,14 @@ services:
       - "8080:80"
 
   php:
-    build: ./php
+    build: ./api
     restart: always
     volumes:
       - ./api:/var/www/test-task.loc
 
   node:
-    image: node:lts
+    build: ./client
     restart: always
     ports:
       - "8008:8000"
-    volumes:
-      - ./client:/var/www/client
     tty: true
-    working_dir: /var/www/client
-    #command: npm install
