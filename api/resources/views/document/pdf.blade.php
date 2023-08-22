@@ -23,8 +23,7 @@
                 <div style="text-align: justify; font-size: 11pt;">Внимание! Оплата данного счета означает согласие с условиями поставки товара. Счет действителен в течение 5 (пяти) банковских дней, не считая дня выписки счета.</div>
             </td>
             <td style="width: 32%; text-align: center;">
-                {{ 'лого компании' }}
-                <img src="" style="width: 200px; height: auto;">
+                <img src="{{ $company_logo }}" style="width: 200px; height: auto;">
             </td>
         </tr>
 
@@ -135,17 +134,17 @@
                 <td>
                     {{ $product['name'] }}
                 </td>
-                <td style="width:20mm; white-space: nowrap;">
+                <td style="width:20mm; text-align: center; white-space: nowrap;">
                     {{ $product['count'] }}
                 </td>
-                <td style="width:17mm;  white-space: nowrap;">
+                <td style="width:17mm; text-align: center;  white-space: nowrap;">
                     {{ 'шт' }}
                 </td>
                 <td style="width:27mm; text-align: center;  white-space: nowrap; ">
                     {{ $product['price'] }}
                 </td>
                 <td style="width:27mm; text-align: center;  white-space: nowrap;">
-                    {{ $product['count'] * $product['price'] }}
+                    {{ $product['amount'] }}
                 </td>
             </tr>
         @endforeach
@@ -156,13 +155,13 @@
         <tr>
             <td></td>
             <td style="width:37mm; font-weight:bold;  text-align:right;">Всего к оплате:</td>
-            <td style="width:27mm; font-weight:bold;  text-align: center; ">{{ 'общая сумма' }} руб.</td>
+            <td style="width:27mm; font-weight:bold;  text-align: center; ">{{ $total_amount }} руб.</td>
         </tr>
     </table>
 
     <br />
     <div>
-        Всего наименований {{ 'количество товаров' }} на сумму {{ 'общая сумма' }} руб.<br />
+        Всего наименований {{ $products->count() }} на сумму {{ $total_amount }} руб.<br />
     </div>
     <hr style="margin-bottom: 25px; margin-top: 25px;">
     <div>

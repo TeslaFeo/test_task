@@ -27,7 +27,7 @@ class DocumentRequest extends FormRequest
             'provider' => ['required', 'string', 'min:3', 'max:255'],
             'provider_inn' => ['required', 'integer', 'min_digits:3', 'max_digits:30'],
             'provider_kpp' => ['required', 'integer', 'min_digits:3', 'max_digits:30'],
-            'company_logo' => ['required', 'image'],
+            'company_logo' => ['required', 'image', 'max:4096'],
             'customer_full_name' => ['required', 'string', 'min:3', 'max:255'],
             'customer_inn' => ['required', 'string', 'min:3', 'max:255'],
             'products' => ['required', 'array', 'min:1',],
