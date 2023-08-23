@@ -15,6 +15,14 @@ services:
     restart: always
     volumes:
       - ./api:/var/www/test-task.loc
+    working_dir: /var/www/test-task.loc
+
+  composer:
+    image: composer:lts
+    volumes:
+      - ./api:/var/www/test-task.loc
+    working_dir: /var/www/test-task.loc
+    command: composer install
 
   node:
     build: ./client
